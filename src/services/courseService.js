@@ -1,4 +1,4 @@
-import { courseApi } from '../api/courseApi';
+import courseApi from '../api/courseApi.js';
 
 export const courseService = {
     fetchCourses: async () => {

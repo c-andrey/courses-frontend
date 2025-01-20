@@ -1,0 +1,59 @@
+@use 'variables';
+@use 'mixins';
+@use 'sass:color';
+
+button {
+  @include mixins.button-style(variables.$primary-color, color.adjust(variables.$primary-color, $lightness: variables.$lightness));
+}
+
+body {
+  background-color: variables.$body-bg;
+  font-family: variables.$font-family;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: variables.$primary-color;
+  text-align: center;
+  padding: 20px;
+}
+
+.course-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.course {
+  background-color: white;
+  padding: 20px;
+  border-radius: variables.$border-radius;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+button {
+  @include mixins.button-style(variables.$secondary-color, color.adjust(variables.$secondary-color, $lightness: variables.$lightness));
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: variables.$border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: color.adjust(variables.$secondary-color, $lightness: variables.$lightness);
+  }
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: variables.$border-radius;
+  box-sizing: border-box;
+}
