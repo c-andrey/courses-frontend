@@ -4,10 +4,15 @@ import terser from 'gulp-terser';
 import browserSync from 'browser-sync';
 import sourcemaps from 'gulp-sourcemaps';
 import dartSass from 'sass';
+import image from 'gulp-image';
 
 const sassCompiler = sass(dartSass);
 
 const paths = {
+    images: {
+        src: 'src/assets/images/**/*.{jpg,jpeg,png,gif,svg}',
+        dest: 'dist/assets/images',
+    },
     styles: {
         src: ['src/assets/styles/**/*.scss', '!dist/**/*'],
         dest: 'dist/styles/',
@@ -22,14 +27,11 @@ const paths = {
     },
 };
 
-const server = browserSync.create();
-
 export function styles() {
     return gulp
         .src(paths.styles.src)
         .pipe(sassCompiler().on('error', sassCompiler.logError))
-        .pipe(gulp.dest(paths.styles.dest))
-        .pipe(server.stream()); // Atualiza o navegador
+        .pipe(gulp.dest(paths.styles.dest));
 }
 
 // Tarefa para compilar JS com Babel e minificar
@@ -47,8 +49,17 @@ export function html() {
     return gulp.src(paths.html.src).pipe(gulp.dest(paths.html.dest));
 }
 
+// Tarefa para otimizar imagens
+export function images() {
+    return gulp
+        .src(paths.images.src) // Localiza as imagens
+        .pipe(image()) // Otimiza as imagens
+        .pipe(gulp.dest(paths.images.dest)); // Salva no diretório de saída
+}
+
 // Tarefa para iniciar o BrowserSync
 export function serve() {
+    const server = browserSync.create();
     browserSync.init({
         server: {
             baseDir: './dist', // Define a pasta base do servidor
@@ -56,18 +67,11 @@ export function serve() {
         port: 3000, // Define a porta do servidor
     });
 
-    // Observar alterações nos arquivos
-    gulp.watch(paths.styles.src, styles);
-    gulp.watch(paths.scripts.src, scripts);
-    gulp.watch(paths.html.src, html);
+    gulp.watch(paths.styles.src, styles).on('change', server.reload);
+    gulp.watch(paths.scripts.src, scripts).on('change', server.reload);
+    gulp.watch(paths.images.src, images).on('change', server.reload);
+    gulp.watch(paths.html.src, html).on('change', server.reload);
 }
 
-// Exportar tarefas
-// refact to type module
-// exports.styles = styles;
-// exports.scripts = scripts;
-// exports.html = html;
-// exports.default = gulp.series(gulp.parallel(styles, scripts, html), serve);
-// exports.serve = gulp.series(gulp.parallel(styles, scripts, html), serve); // Executa o servidor com as tarefas
-const build = gulp.series(gulp.parallel(styles, scripts, html), serve);
+const build = gulp.series(gulp.parallel(styles, scripts, html, images), serve);
 export default build;
