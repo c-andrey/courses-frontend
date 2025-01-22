@@ -1,0 +1,153 @@
+@use 'variables';
+
+header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 30px 40px 10px;
+    .container-logo {
+        display: flex;
+        flex: 0.3;
+        align-items: center;
+        flex-direction: column;
+
+        .logo {
+            height: 50px;
+            color: black;
+        }
+    }
+
+    .container-profile {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+        width: 100%;
+        gap: 15px;
+
+        .search {
+            display: flex;
+            position: relative;
+            width: 40%;
+
+            input {
+                padding: 15px 5px 13px 15px;
+                border: 1px solid #ccc;
+                border-radius: variables.$border-radius;
+                width: 100%;
+                box-sizing: border-box;
+                background-color: variables.$input-background-color;
+            }
+
+            i {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: #666;
+                pointer-events: none;
+                font-size: 16px;
+            }
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid grey;
+            }
+
+            .profile-name-container {
+                display: flex;
+                align-items: flex-start;
+                flex-direction: column;
+
+                .profile-name {
+                    font-size: 1.2rem;
+                }
+
+                .profile-message {
+                    font-size: 0.8rem;
+                    color: #666;
+                }
+            }
+        }
+    }
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 1024px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+
+        .container-profile {
+            .search {
+                min-width: 200px;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 15px;
+
+        .container-logo {
+            .logo {
+                height: 30px;
+            }
+        }
+
+        .container-profile {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            .profile {
+                gap: 5px;
+                .avatar {
+                    width: 30px;
+                    height: 30px;
+                }
+
+                .profile-name-container {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+
+        .container-logo {
+            .logo {
+                height: 25px;
+            }
+        }
+
+        .container-profile {
+            .profile {
+                .avatar {
+                    width: 25px;
+                    height: 25px;
+                }
+            }
+        }
+    }
+}

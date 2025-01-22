@@ -2,18 +2,13 @@
 @use 'mixins';
 @use 'sass:color';
 
-button {
-    @include mixins.button-style(
-        variables.$primary-color,
-        color.adjust(variables.$primary-color, $lightness: variables.$lightness)
-    );
-}
-
+//main
 body {
     background-color: variables.$body-bg;
     font-family: variables.$font-family;
     margin: 0;
     padding: 0;
+    color: variables.$font-color;
 }
 
 h1 {
@@ -22,51 +17,146 @@ h1 {
     padding: 20px;
 }
 
-.course-list {
+.d-flex {
     display: flex;
-    flex-wrap: wrap;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.flex-5 {
+    flex: 0.5;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+// course list
+
+.course-list {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-course-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-course-button:hover {
+    background-color: #0056b3;
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
 }
 
-.course {
+.course-card {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.course-card-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.course-card-body {
+    padding: 15px;
+}
+
+.course-card-body h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.course-card-body p {
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.view-course-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.view-course-button:hover {
+    background-color: #218838;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
     background-color: white;
     padding: 20px;
-    border-radius: variables.$border-radius;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
+    border-radius: 8px;
     text-align: center;
-}
-
-button {
-    @include mixins.button-style(
-        variables.$secondary-color,
-        color.adjust(
-            variables.$secondary-color,
-            $lightness: variables.$lightness
-        )
-    );
-    margin-top: 10px;
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: variables.$border-radius;
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-    &:hover {
-        background-color: color.adjust(
-            variables.$secondary-color,
-            $lightness: variables.$lightness
-        );
-    }
-}
-
-input,
-textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: variables.$border-radius;
-    box-sizing: border-box;
+    width: 400px;
 }
