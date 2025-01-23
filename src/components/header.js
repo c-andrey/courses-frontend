@@ -1,3 +1,5 @@
+import debounce from '../utils/debounce.js';
+
 const header = {
     render: () => {
         return `
@@ -8,7 +10,7 @@ const header = {
 
             <div class="container-profile">
                 <div class="search">
-                    <input type="text" placeholder="Pesquisar cursos...">
+                    <input type="text" class="search-input" placeholder="Pesquisar cursos...">
                     <i class="fas fa-search"></i>
                 </div>
                 <div class="profile">
@@ -26,6 +28,16 @@ const header = {
             </div>
         </header>
         `;
+    },
+    init: (onSearch) => {
+        const searchInput = document.querySelector('.search-input');
+        const handleSearch = debounce((event) => {
+            const filter = event.target.value.trim();
+            onSearch({ filter });
+        }, 500);
+        if (searchInput) {
+            searchInput.addEventListener('input', handleSearch);
+        }
     },
 };
 

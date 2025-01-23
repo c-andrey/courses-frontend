@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     carousel.init('carousel-container');
 
-    async function loadCourses() {
+    async function loadCourses(filter = {}) {
         try {
-            const courses = await courseService.fetchCourses();
+            const courses = await courseService.fetchCourses(filter);
             const courseList = courseListComponent.render(courses);
 
             contentDiv.innerHTML = '';
@@ -54,4 +54,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     loadCourses();
 
     firstTimeModalComponent.init();
+
+    headerComponent.init((filter) => {
+        loadCourses(filter);
+    });
 });
