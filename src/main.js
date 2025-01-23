@@ -4,6 +4,7 @@ import headerComponent from './components/header.js';
 import footerComponent from './components/footer.js';
 import coursesApi from './api/courseApi.js';
 import carousel from './components/carousel.js';
+import firstTimeModalComponent from './components/firstTimeModal.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const contentDiv = document.getElementById('content');
@@ -31,7 +32,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     loadCourses();
                 });
             });
-            console.log(courseList);
         } catch (error) {
             console.error(error);
             contentDiv.innerHTML = '<h3>Error loading courses</h3>';
@@ -51,4 +51,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     contentDiv.appendChild(formDiv);
 
     loadCourses();
+
+    firstTimeModalComponent.init();
 });
