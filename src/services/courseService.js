@@ -1,6 +1,6 @@
 import courseApi from '../api/courseApi.js';
 
-export const courseService = {
+const courseService = {
     fetchCourses: async () => {
         const courses = await courseApi.getAll();
         return courses.map((course) => ({
@@ -31,3 +31,5 @@ export const courseService = {
         return await courseApi.delete(id);
     },
 };
+
+export default courseService;

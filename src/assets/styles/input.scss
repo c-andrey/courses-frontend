@@ -1,0 +1,97 @@
+@use 'variables';
+@use 'sass:color';
+
+input {
+    width: 100%;
+    padding: variables.$spacing-small;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius;
+    font-size: variables.$font-size-base;
+    color: variables.$text-color;
+    background-color: variables.$input-background-color;
+    box-sizing: border-box;
+    transition:
+        border-color variables.$transition-default,
+        box-shadow variables.$transition-default;
+
+    &:focus {
+        border-color: variables.$primary-color;
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: variables.$text-muted;
+    }
+
+    &:disabled {
+        background-color: variables.$background-color;
+        color: variables.$text-muted;
+        cursor: not-allowed;
+    }
+}
+textarea {
+    width: 100%;
+    padding: variables.$spacing-small;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius;
+    font-size: variables.$font-size-base;
+    color: variables.$text-color;
+    background-color: variables.$input-background-color;
+    box-sizing: border-box;
+    transition:
+        border-color variables.$transition-default,
+        box-shadow variables.$transition-default;
+
+    &:focus {
+        border-color: variables.$primary-color;
+        box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+        outline: none;
+    }
+
+    &::placeholder {
+        color: variables.$text-muted;
+    }
+
+    &:disabled {
+        background-color: variables.$background-color;
+        color: variables.$text-muted;
+        cursor: not-allowed;
+    }
+}
+
+button {
+    padding: variables.$spacing-small variables.$spacing-medium;
+    border: none;
+    border-radius: variables.$border-radius;
+    font-size: variables.$font-size-base;
+    color: white;
+    background-color: variables.$primary-color;
+    cursor: pointer;
+    transition: background-color variables.$transition-default;
+
+    &:hover {
+        background-color: color.adjust(
+            variables.$primary-color,
+            $lightness: variables.$lightness
+        );
+    }
+
+    &:disabled {
+        background-color: variables.$background-color;
+        color: variables.$text-muted;
+        cursor: not-allowed;
+    }
+
+    &.danger {
+        background-color: variables.$danger-color;
+        color: white;
+
+        &:hover {
+            background-color: color.adjust(
+                variables.$danger-color,
+                $lightness: variables.$lightness
+            );
+        }
+    }
+}

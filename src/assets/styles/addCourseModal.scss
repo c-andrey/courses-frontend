@@ -1,0 +1,60 @@
+@use 'variables';
+@use 'sass:color';
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-content {
+        background-color: white;
+        padding: 25px;
+        border-radius: variables.$border-radius;
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+        h2 {
+            font-size: 1.5rem;
+            color: variables.$primary-color;
+            margin-bottom: 15px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border-radius: variables.$border-radius;
+        }
+
+        p {
+            font-size: 1rem;
+            color: variables.$text-color;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        #add-course-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+
+            .actions {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+            }
+        }
+    }
+}

@@ -1,18 +1,37 @@
-$primary-color: #3498db;
-$secondary-color: #2c3e50;
-$lightness: -10%;
-$body-bg: #f4f4f9;
-
-// font
-$font-family: Arial, sans-serif;
-$font-color: #333;
-
 $border-radius: 40px;
-$input-background-color: #eae7e7;
-$border-color: #ccc;
 $content-bg: #ccc;
+$border-color: #ccc;
 
 $footer-bg-color: white;
 $footer-text-color: #333;
 $footer-highlight-color: #f4a261;
 $footer-border-color: #444;
+
+$primary-color: #3498db;
+$secondary-color: #2c3e50;
+$danger-color: #e74c3c;
+$lightness: -10%;
+$body-bg: #f4f4f9;
+$text-color: #333;
+$text-muted: #666;
+$background-color: #f9f9f9;
+$input-background-color: #eae7e7;
+
+$border-radius: 8px;
+$spacing-small: 10px;
+$spacing-medium: 20px;
+$spacing-large: 40px;
+
+$font-size-small: 0.875rem;
+$font-size-base: 1rem;
+$font-size-large: 1.25rem;
+$font-family: 'Arial', sans-serif;
+$font-color: #333;
+
+$box-shadow-light: 0 2px 5px rgba(0, 0, 0, 0.1);
+$box-shadow-medium: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+$transition-default: 0.3s ease;
+
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
