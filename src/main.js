@@ -1,14 +1,18 @@
 import courseListComponent from './components/courseList.js';
 import courseFormComponent from './components/courseForm.js';
 import headerComponent from './components/header.js';
+import footerComponent from './components/footer.js';
 import coursesApi from './api/courseApi.js';
 import carousel from './components/carousel.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const contentDiv = document.getElementById('content');
     const headerDiv = document.getElementById('header');
+    const footerDiv = document.getElementById('footer');
 
-    headerDiv.innerHTML += headerComponent.render();
+    headerDiv.innerHTML = headerComponent.render();
+    footerDiv.innerHTML = footerComponent.render();
+
     carousel.init('carousel-container');
 
     async function loadCourses() {
