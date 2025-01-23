@@ -56,6 +56,8 @@ export const httpClient = {
     },
 
     handleError(error) {
+        console.error(error);
+
         if (error instanceof Error) {
             console.error('Network or unexpected error:', error.message);
             throw new Error('An unexpected error occurred. Please try again.');

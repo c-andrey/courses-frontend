@@ -1,7 +1,7 @@
 import courseService from '../services/courseService.js';
 
 const CourseModal = {
-    show: function (course) {
+    show: function (course, courseCard) {
         const modal = document.createElement('div');
         modal.classList.add('modal');
 
@@ -29,9 +29,10 @@ const CourseModal = {
                 );
                 if (confirmDelete) {
                     try {
-                        await courseService.delete(course.id);
+                        await courseService.deleteCourse(course.id);
                         alert('Curso deletado com sucesso!');
                         document.body.removeChild(modal);
+                        courseCard.remove();
                     } catch (error) {
                         console.error('Erro ao deletar o curso:', error);
                         alert('Erro ao deletar o curso. Tente novamente.');

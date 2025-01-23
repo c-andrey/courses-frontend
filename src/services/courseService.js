@@ -1,12 +1,13 @@
 import courseApi from '../api/courseApi.js';
 
 const courseService = {
-    fetchCourses: async () => {
-        const courses = await courseApi.getAll();
+    fetchCourses: async (filters = {}) => {
+        const courses = await courseApi.getAll(filters);
         return courses.map((course) => ({
             id: course.id,
-            title: course.title,
+            name: course.name,
             description: course.description,
+            image: course.image,
         }));
     },
 
@@ -14,8 +15,9 @@ const courseService = {
         const course = await courseApi.getById(id);
         return {
             id: course.id,
-            title: course.title,
+            name: course.name,
             description: course.description,
+            image: course.image,
         };
     },
 

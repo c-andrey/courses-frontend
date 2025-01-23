@@ -1,11 +1,12 @@
 import { httpClient } from '../utils/httpClient.js';
 
-const BASE_URL = 'http://localhost:8080/';
+const BASE_URL = 'http://localhost:39531/';
 const COURSES_URL = BASE_URL + 'courses';
 
 const courseApi = {
-    getAll: async () => {
-        return await httpClient.get(COURSES_URL);
+    getAll: async (filters) => {
+        const query = new URLSearchParams(filters).toString();
+        return await httpClient.get(`${COURSES_URL}?${query}`);
     },
 
     getById: async (id) => {

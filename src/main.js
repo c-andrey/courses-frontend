@@ -2,9 +2,9 @@ import courseListComponent from './components/courseList.js';
 import courseFormComponent from './components/courseForm.js';
 import headerComponent from './components/header.js';
 import footerComponent from './components/footer.js';
-import coursesApi from './api/courseApi.js';
 import carousel from './components/carousel.js';
 import firstTimeModalComponent from './components/firstTimeModal.js';
+import courseService from './services/courseService.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     const contentDiv = document.getElementById('content');
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function loadCourses() {
         try {
-            const courses = await coursesApi.getAll();
+            const courses = await courseService.fetchCourses();
             const courseList = courseListComponent.render(courses);
 
             contentDiv.innerHTML = '';
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             deleteButtons.forEach((button) => {
                 button.addEventListener('click', async function () {
                     const courseId = this.dataset.id;
-                    await coursesApi.deleteCourse(courseId);
+                    await courseService.deleteCourse(courseId);
                     loadCourses();
                 });
             });
@@ -40,15 +40,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const formDiv = courseFormComponent.render(async (data) => {
         try {
-            await coursesApi.createCourse(data);
+            await courseService.createCourse(data);
             loadCourses();
+            return true;
         } catch (error) {
             alert(error.message);
         }
     });
 
-    contentDiv.innerHTML = '';
     contentDiv.appendChild(formDiv);
+    contentDiv.innerHTML = '';
 
     loadCourses();
 

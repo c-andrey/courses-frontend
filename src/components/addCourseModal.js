@@ -1,4 +1,4 @@
-import coursesApi from '../api/courseApi.js';
+import courseService from '../services/courseService.js';
 
 const AddCourseModal = {
     show: function (onCourseAdded) {
@@ -32,30 +32,39 @@ const AddCourseModal = {
         modal
             .querySelector('#add-course-form')
             .addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const name = modal.querySelector('#course-name').value;
-                const description = modal.querySelector(
-                    '#course-description'
-                ).value;
-                const imageInput = modal.querySelector('#course-image');
-                const imageFile = imageInput.files[0];
+                try {
+                    e.preventDefault();
+                    const name = modal.querySelector('#course-name').value;
+                    const description = modal.querySelector(
+                        '#course-description'
+                    ).value;
+                    const imageInput = modal.querySelector('#course-image');
+                    const imageFile = imageInput.files[0];
 
-                const reader = new FileReader();
-                reader.onload = async function () {
-                    const imageBase64 = reader.result;
+                    const reader = new FileReader();
+                    reader.onload = async function () {
+                        const imageBase64 = reader.result;
 
-                    const newCourse = { name, description, image: imageBase64 };
+                        const newCourse = {
+                            name,
+                            description,
+                            image: imageBase64,
+                        };
 
-                    const createdCourse =
-                        await coursesApi.createCourse(newCourse);
+                        const createdCourse =
+                            await courseService.createCourse(newCourse);
 
-                    if (createdCourse) {
-                        onCourseAdded(createdCourse);
-                        document.body.removeChild(modal);
-                    }
-                };
+                        if (createdCourse) {
+                            onCourseAdded(createdCourse);
+                            document.body.removeChild(modal);
+                        }
+                    };
 
-                reader.readAsDataURL(imageFile);
+                    reader.readAsDataURL(imageFile);
+                } catch (error) {
+                    console.error('Erro ao adicionar o curso:', error);
+                    alert('Erro ao adicionar o curso. Tente novamente.');
+                }
             });
 
         document.body.appendChild(modal);

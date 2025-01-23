@@ -26,6 +26,7 @@ const CourseList = {
         courses.forEach((course) => {
             const courseCard = document.createElement('div');
             courseCard.classList.add('course-card');
+            courseCard.dataset.id = course.id;
 
             courseCard.innerHTML = `
           <div class="course-card-image">
@@ -43,7 +44,7 @@ const CourseList = {
             courseCard
                 .querySelector('.view-course-button')
                 .addEventListener('click', () => {
-                    courseModalComponent.show(course);
+                    courseModalComponent.show(course, courseCard);
                 });
 
             courseGrid.appendChild(courseCard);
@@ -60,6 +61,8 @@ const CourseList = {
 
         addCourseButton.addEventListener('click', () => {
             addCourseModalComponent.show((newCourse) => {
+                const courseListContainer =
+                    document.querySelector('.course-list');
                 courses.push(newCourse);
                 this.refreshCourses(courseListContainer, courses);
             });

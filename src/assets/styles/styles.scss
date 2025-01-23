@@ -2,7 +2,6 @@
 @use 'mixins';
 @use 'sass:color';
 
-//main
 body {
     background-color: variables.$body-bg;
     font-family: variables.$font-family;
@@ -69,9 +68,4 @@ h1 {
 
 .flex-1 {
     flex: 1;
-}
-
-.content {
-    background-color: variables.$content-bg;
-    overflow-y: auto;
 }
