@@ -1,3 +1,5 @@
+@use 'variables';
+
 .carousel {
     position: relative;
     width: 100%;
@@ -38,5 +40,46 @@
 
     .carousel-button.next {
         right: 10px;
+    }
+
+    .carousel-dots-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        position: absolute;
+        bottom: 5px;
+
+        width: 100%;
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+
+            align-items: center;
+            gap: 8px;
+
+            background-color: white;
+            padding: 5px 10px;
+            border-radius: variables.$border-radius;
+
+            .carousel-dot {
+                padding: 0;
+                width: 16px;
+                height: 16px;
+                border: none;
+                border-radius: 100%;
+                background-color: #ccc;
+                cursor: pointer;
+            }
+
+            .carousel-dot.current-dot {
+                background-color: #333;
+            }
+
+            .carousel-dot:hover {
+                background-color: #666;
+            }
+        }
     }
 }
