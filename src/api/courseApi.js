@@ -1,7 +1,7 @@
 import { httpClient } from '../utils/httpClient.js';
 
-const BASE_URL = 'http://localhost:39531/';
-const COURSES_URL = BASE_URL + 'courses';
+const API_URL = process.env.API_URL;
+const COURSES_URL = API_URL + '/courses';
 
 const courseApi = {
     getAll: async (filters) => {

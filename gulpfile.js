@@ -5,6 +5,8 @@ import browserSync from 'browser-sync';
 import sourcemaps from 'gulp-sourcemaps';
 import dartSass from 'sass';
 import image from 'gulp-image';
+import env from 'gulp-env';
+import replace from 'gulp-replace';
 
 const sassCompiler = sass(dartSass);
 
@@ -27,6 +29,15 @@ const paths = {
     },
 };
 
+export function setEnv(done) {
+    env({
+        vars: {
+            API_URL: 'http://localhost:8080/',
+        },
+    });
+    done();
+}
+
 export function styles() {
     return gulp
         .src(paths.styles.src)
@@ -34,44 +45,48 @@ export function styles() {
         .pipe(gulp.dest(paths.styles.dest));
 }
 
-// Tarefa para compilar JS com Babel e minificar
 export function scripts() {
     return gulp
         .src(paths.scripts.src)
         .pipe(sourcemaps.init())
-        .pipe(terser()) // Minifica o código
-        .pipe(sourcemaps.write('.')) // Grava o sourcemap no dist
+        .pipe(replace('process.env.API_URL', `'${process.env.API_URL}'`))
+        .pipe(terser())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(paths.scripts.dest));
 }
 
-// Copiar HTML para o diretório de saída
 export function html() {
     return gulp.src(paths.html.src).pipe(gulp.dest(paths.html.dest));
 }
 
-// Tarefa para otimizar imagens
 export function images() {
     return gulp
-        .src(paths.images.src) // Localiza as imagens
-        .pipe(image()) // Otimiza as imagens
-        .pipe(gulp.dest(paths.images.dest)); // Salva no diretório de saída
+        .src(paths.images.src)
+        .pipe(image())
+        .pipe(gulp.dest(paths.images.dest));
 }
 
-// Tarefa para iniciar o BrowserSync
-export function serve() {
+export function serve(done) {
     const server = browserSync.create();
-    browserSync.init({
+    server.init({
         server: {
-            baseDir: './dist', // Define a pasta base do servidor
+            baseDir: './dist',
         },
-        port: 3000, // Define a porta do servidor
+        port: 3000,
     });
 
     gulp.watch(paths.styles.src, styles).on('change', server.reload);
     gulp.watch(paths.scripts.src, scripts).on('change', server.reload);
     gulp.watch(paths.images.src, images).on('change', server.reload);
     gulp.watch(paths.html.src, html).on('change', server.reload);
+
+    done();
 }
 
-const build = gulp.series(gulp.parallel(styles, scripts, html, images), serve);
+const build = gulp.series(
+    setEnv,
+    gulp.parallel(styles, scripts, html, images),
+    serve
+);
+
 export default build;
