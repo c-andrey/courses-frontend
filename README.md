@@ -31,12 +31,3 @@ Por padrão, o frontend estará disponível no endereço:
 http://localhost:3000
 ```
 
----
-
-## Observações
-- Certifique-se de que o backend está rodando antes de acessar o frontend.
-- Qualquer configuração adicional pode ser realizada nos respectivos arquivos `.env` para o backend e frontend.
-
----
-
-**Feito com ❤️ pela equipe de desenvolvimento.**
