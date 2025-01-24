@@ -1,29 +1,33 @@
-# README
+# Projeto Full Stack (Backend + Frontend)
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Este projeto contém duas aplicações: um backend e um frontend. Siga as instruções abaixo para configurar e iniciar ambos os serviços.
 
-### What is this repository for?
+---
 
-- Quick summary
-- Version
-- [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Frontend
 
-### How do I get set up?
+### **Pré-requisitos**
+- Node.js (versão LTS) instalado.
+- npm (Node Package Manager) instalado.
 
-- Summary of set up
-- Configuration
-- Dependencies
-- Database configuration
-- How to run tests
-- Deployment instructions
+### **Configuração e Início**
+1. Navegue até a pasta do frontend:
+```bash
+cd frontend
+```
+2. Instale as dependências:
+```bash
+npm install
+```
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run start
+```
+4. Configure a rota da API para o backend no arquivo gulpfile.js
 
-### Contribution guidelines
+### **Acessar o Frontend**
+Por padrão, o frontend estará disponível no endereço:
+```
+http://localhost:3000
+```
 
-- Writing tests
-- Code review
-- Other guidelines
-
-### Who do I talk to?
-
-- Repo owner or admin
-- Other community or team contact
